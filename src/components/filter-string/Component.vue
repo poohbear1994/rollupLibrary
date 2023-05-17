@@ -33,7 +33,7 @@
 <script lang="ts" setup>
 import { ref, watch } from 'vue'
 import _ from 'lodash'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElPopover, ElButton, ElIcon, ElInput } from 'element-plus'
 import { Search } from '@element-plus/icons-vue'
 const props = defineProps({
 	isActive: {
