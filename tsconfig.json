@@ -108,6 +108,7 @@
     "src/*.tsx",
     "src/**/*.tsx",
     "src/*.vue",
-    "src/**/*.vue"
+    "src/**/*.vue",
+    "vue.d.ts"
   ]
 }
