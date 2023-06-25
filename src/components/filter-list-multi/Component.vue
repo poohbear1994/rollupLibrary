@@ -22,10 +22,11 @@
 					<el-checkbox
 						v-for="item in dataSource"
 						:key="item.value"
-						:label="JSON.stringify(item)"
+						:label="item.value"
 						style="display: block; line-height: 32px"
-						><span style="font-size: 12px">{{ item.label }}</span></el-checkbox
 					>
+						<span style="font-size: 12px">{{ item.label }}</span>
+					</el-checkbox>
 				</el-checkbox-group>
 			</div>
 		</el-scrollbar>
@@ -44,7 +45,7 @@ import { Filter } from '@element-plus/icons-vue'
 
 interface optionType {
 	label: string
-	value: any
+	value: number | string
 }
 const props = defineProps({
 	isActive: {
@@ -63,22 +64,20 @@ const props = defineProps({
 })
 const emits = defineEmits(['confirm', 'clear', 'change'])
 
-const checkedData = ref<optionType[] | string[]>([])
+const checkedData = ref<optionType[]>([])
 const checkAll = ref(false)
 const popover = ref()
-const dataInHide = ref<optionType[] | string[]>([])
+const dataInHide = ref<optionType[]>([])
 const confirmBtnDisabled = ref(true)
 
 /**
  * @description: 全选切换行为
  * @param {*} val: 是否全选
- * @return {*}
- * @Date Changed:
  */
 function handleCheckAllChange(val: boolean): void {
 	if (val) {
 		checkAll.value = true
-		checkedData.value = props.dataSource.map(item => JSON.stringify(item))
+		checkedData.value = props.dataSource.map(item => item.value)
 	} else {
 		checkAll.value = false
 		checkedData.value = []
@@ -88,8 +87,6 @@ function handleCheckAllChange(val: boolean): void {
 /**
  * @description: 选择发生变化
  * @param {*} value
- * @return {*}
- * @Date Changed:
  */
 function handleDataChange(value: any[]) {
 	const checkedCount = value.length
@@ -100,8 +97,7 @@ function handleDataChange(value: any[]) {
 	}
 	const labels: any[] = []
 	const values: any[] = []
-	checkedData.value.forEach((element: any) => {
-		element = JSON.parse(element)
+	checkedData.value.forEach(element => {
 		labels.push(element.label)
 		values.push(element.value)
 	})
@@ -120,8 +116,7 @@ function handleDataChange(value: any[]) {
 function confirm(): void {
 	const labels: any[] = []
 	const values: any[] = []
-	checkedData.value.forEach((element: any) => {
-		element = JSON.parse(element)
+	checkedData.value.forEach(element => {
 		labels.push(element.label)
 		values.push(element.value)
 	})
@@ -136,8 +131,6 @@ function confirm(): void {
 
 /**
  * @description: 清除选择事件
- * @return {*}
- * @Date Changed:
  */
 function clear(): void {
 	checkAll.value = false
@@ -149,8 +142,6 @@ function clear(): void {
 
 /**
  * @description: 气泡窗口隐藏事件
- * @return {*}
- * @Date Changed:
  */
 function popoverHide(): void {
 	checkedData.value = dataInHide.value
