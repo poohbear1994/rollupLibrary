@@ -7,9 +7,11 @@ import terser from '@rollup/plugin-terser'
 import ts from 'rollup-plugin-typescript2'
 import vue from '@vitejs/plugin-vue'
 import postcss from 'rollup-plugin-postcss'
+import { visualizer } from 'rollup-plugin-visualizer'
 
 const inputPath = fileURLToPath(new URL('src/index.ts', import.meta.url))
 const esOutputPath = fileURLToPath(new URL('dist/index.es.js', import.meta.url))
+const cjsOutputPath = fileURLToPath(new URL('dist/index.js', import.meta.url))
 const tsConfigPath = fileURLToPath(new URL('tsconfig.json', import.meta.url))
 
 // node环境默认不识别ESM
@@ -27,6 +29,12 @@ export default {
 			name: 'index',
 			exports: 'named',
 		},
+		{
+			file: cjsOutputPath,
+			format: 'cjs',
+			name: 'index',
+			exports: 'named',
+		},
 	],
 	// 配置插件
 	plugins: [
@@ -34,16 +42,22 @@ export default {
 		resolve({
 			extensions: ['.js', '.ts'],
 		}),
-		commonjs(),
 		ts({
 			tsconfig: tsConfigPath,
 		}),
 		// 将ES6语法转换为ES5语法
 		babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
+		commonjs(),
 		json(),
 		vue(),
 		postcss({ plugins: [] }),
 		terser(),
+		visualizer({
+			open: true,
+			filename: 'stats.html',
+			gzipSize: true,
+			brotliSize: true,
+		}),
 	],
 	// 不需要打包的模块
 	external: ['vue', 'lodash', 'element-plus', '@element-plus/icons-vue'],

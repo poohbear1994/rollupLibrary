@@ -77,7 +77,7 @@ const confirmBtnDisabled = ref(true)
 function handleCheckAllChange(val: boolean): void {
 	if (val) {
 		checkAll.value = true
-		checkedData.value = props.dataSource.map(item => item.value)
+		checkedData.value = props.dataSource
 	} else {
 		checkAll.value = false
 		checkedData.value = []

@@ -1,7 +1,7 @@
 {
-  "name": "zdi-components-lib",
+  "name": "components-lib",
   "version": "1.0.0",
-  "description": "zdi组件库",
+  "description": "这是一个使用vue+ts打包的组件库",
   "main": "dist/index.es.js",
   "types": "dist/types/index.d.ts",
   "module": "dist/index.es.js",
@@ -9,7 +9,7 @@
   "exports": {
     ".": {
       "import": "./dist/index.es.js",
-      "require": "./dist/index.cjs.js",
+      "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
     "./types": "./dist/types"
@@ -21,11 +21,12 @@
     "clean:dist": "rm -rf dist",
     "dev:types": "tsc -b -w ./tsconfig.types.json",
     "dev:lib": "rollup -wc rollup.config.dev.js",
-    "prod": "npm run clean:dist && rollup -c rollup.config.dev.js && tsc -b ./tsconfig.types.json",
+    "prod": "NODE_ENV=production npm run clean:dist && rollup -c rollup.config.dev.js && tsc -b ./tsconfig.types.json",
     "lint": "eslint 'src/**/*.+(js|ts|vue)'",
     "format": "prettier --write 'src/**/*.+(js|ts|vue)'",
     "prepare": "husky install",
-    "test:unit": "jest --watch"
+    "test:dev": "jest --watch--testPathPattern=src",
+    "test": "jest --testPathPattern=src"
   },
   "keywords": [
     "vue",
@@ -62,6 +63,8 @@
     "rollup": "^3.22.0",
     "rollup-plugin-postcss": "^4.0.2",
     "rollup-plugin-typescript2": "^0.34.1",
+    "rollup-plugin-visualizer": "^5.9.2",
+    "sass": "^1.63.6",
     "ts-jest": "^26.5.6",
     "typescript": "^4.8.4",
     "vue": "^3.3.2",
@@ -93,8 +96,6 @@
     "core-js": "^3.6.5",
     "dayjs": "^1.11.7",
     "element-plus": ">=2.2.17",
-    "lodash": ">=4.17.21",
-    "rollup-plugin-cleanup": "^3.2.1",
-    "sass": "^1.53.0"
+    "lodash": ">=4.17.21"
   }
 }
