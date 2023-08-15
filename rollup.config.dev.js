@@ -8,6 +8,7 @@ import terser from '@rollup/plugin-terser'
 import ts from 'rollup-plugin-typescript2'
 import vue from '@vitejs/plugin-vue'
 import postcss from 'rollup-plugin-postcss'
+import progress from 'rollup-plugin-progress'
 import { visualizer } from 'rollup-plugin-visualizer'
 
 const inputPath = fileURLToPath(new URL('src/index.ts', import.meta.url))
@@ -20,7 +21,7 @@ const tsConfigPath = fileURLToPath(new URL('tsconfig.json', import.meta.url))
  * @type {import('rollup').RollupOptions}
  */
 export default {
-	cache: false,
+	cache: true,
 	// 打包入口
 	input: inputPath,
 	// 打包出口
@@ -43,6 +44,9 @@ export default {
 	],
 	// 配置插件
 	plugins: [
+		progress({
+			clearLine: false,
+		}),
 		// resolve会将外部用到的模块全部打包到项目里面
 		resolve({
 			extensions: ['.js', '.ts'],
