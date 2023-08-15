@@ -1,6 +1,7 @@
 import { fileURLToPath } from 'node:url'
 import resolve from '@rollup/plugin-node-resolve'
-import { babel } from '@rollup/plugin-babel'
+// import { babel } from '@rollup/plugin-babel'
+import swc from '@rollup/plugin-swc'
 import json from '@rollup/plugin-json'
 import commonjs from '@rollup/plugin-commonjs'
 import terser from '@rollup/plugin-terser'
@@ -10,12 +11,16 @@ import postcss from 'rollup-plugin-postcss'
 import { visualizer } from 'rollup-plugin-visualizer'
 
 const inputPath = fileURLToPath(new URL('src/index.ts', import.meta.url))
-const esOutputPath = fileURLToPath(new URL('dist/index.es.js', import.meta.url))
+const esOutputPath = fileURLToPath(new URL('dist/index.mjs', import.meta.url))
 const cjsOutputPath = fileURLToPath(new URL('dist/index.js', import.meta.url))
 const tsConfigPath = fileURLToPath(new URL('tsconfig.json', import.meta.url))
 
 // node环境默认不识别ESM
+/**
+ * @type {import('rollup').RollupOptions}
+ */
 export default {
+	cache: false,
 	// 打包入口
 	input: inputPath,
 	// 打包出口
@@ -46,11 +51,12 @@ export default {
 			tsconfig: tsConfigPath,
 		}),
 		// 将ES6语法转换为ES5语法
-		babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
+		// babel({ babelHelpers: 'bundled', extensions: ['.ts'] }),
 		commonjs(),
 		json(),
 		vue(),
 		postcss({ plugins: [] }),
+		swc(),
 		terser(),
 		visualizer({
 			open: true,

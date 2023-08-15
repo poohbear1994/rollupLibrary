@@ -2,13 +2,13 @@
   "name": "components-lib",
   "version": "1.0.0",
   "description": "这是一个使用vue+ts打包的组件库",
-  "main": "dist/index.es.js",
+  "main": "dist/index.js",
   "types": "dist/types/index.d.ts",
-  "module": "dist/index.es.js",
+  "module": "dist/index.mjs",
   "type": "module",
   "exports": {
     ".": {
-      "import": "./dist/index.es.js",
+      "import": "./dist/index.mjs",
       "require": "./dist/index.js",
       "types": "./dist/types/index.d.ts"
     },
@@ -47,6 +47,7 @@
     "@rollup/plugin-commonjs": "^25.0.0",
     "@rollup/plugin-json": "^6.0.0",
     "@rollup/plugin-node-resolve": "^15.0.2",
+    "@rollup/plugin-swc": "^0.1.1",
     "@rollup/plugin-terser": "^0.4.3",
     "@typescript-eslint/eslint-plugin": "^5.59.6",
     "@typescript-eslint/parser": "^5.59.6",
