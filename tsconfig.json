@@ -103,10 +103,10 @@
   // 注意：生成ts类型包时，忽略单元测试
   "exclude": ["node_modules", "**/__tests__"],
   "include": [
-    "src/**.ts",
-    "src/**.d.ts",
-    "src/**.tsx",
-    "src/**.vue",
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.vue",
     "vue.d.ts"
   ],
 }

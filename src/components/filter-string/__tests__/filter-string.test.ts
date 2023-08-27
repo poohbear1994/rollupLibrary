@@ -11,7 +11,6 @@ describe('测试filterString组件', () => {
 				field: 'string',
 			},
 		})
-		expect(wrapper.props().field).toBe('number')
 		expect(wrapper.props().field).toBe('string')
 		expect(wrapper.props().isActive).toBe(true)
 		expect(wrapper.findComponent(ElPopover).exists()).toBe(true)

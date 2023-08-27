@@ -43,7 +43,7 @@
 import { PropType, ref, watch } from 'vue'
 import { Filter } from '@element-plus/icons-vue'
 
-interface optionType {
+export interface optionType {
 	label: string
 	value: number | string
 }

@@ -8,8 +8,6 @@ import universalTableConfig from './components/universal-table'
 import collapseTagListConfig from './components/collapse-tag-list'
 import tablePageHeaderConfig from './components/table-page-header'
 
-const a = 0
-
 const componentConfigList = [
 	filterCascaderConfig,
 	filterDatePickConfig,
