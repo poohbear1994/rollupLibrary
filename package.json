@@ -22,8 +22,8 @@
     "dev:types": "tsc",
     "dev:lib": "rollup -wc rollup.config.dev.js",
     "prod": "cross-env NODE_ENV='production' npm run clean:dist && rollup -c rollup.config.dev.js",
-    "lint": "eslint 'src/**/*.+(js|ts|vue)'",
-    "format": "prettier --write 'src/**/*.+(js|ts|vue)'",
+    "lint": "eslint src/**/*.{js,ts,vue}",
+    "format": "prettier --write src/**/*.{js,ts,vue}",
     "prepare": "husky install",
     "test:dev": "jest --watch--testPathPattern=src",
     "test": "jest --testPathPattern=src"
